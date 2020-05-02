@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stage, Layer, Text } from 'react-konva';
-import Cell from './components/cell/cell.component';
+import Grid from './components/grid/grid.component';
 import './App.css';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Cell />
+          <Grid />
         </Layer>
       </Stage>
     </div>
