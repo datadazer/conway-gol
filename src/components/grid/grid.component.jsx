@@ -7,7 +7,8 @@ class Grid extends Component {
     super();
 
     this.state = {
-      size: 100,
+      rowSize: 40,
+      colSize: 40,
       cells: [],
       generation: 0,
     }
@@ -15,9 +16,9 @@ class Grid extends Component {
 
   generateCells(useRandomSeed) {
     let cells = [];
-    for (let i = 0; i < this.state.size; i++) {
+    for (let i = 0; i < this.state.rowSize; i++) {
       let cellsRow = [];
-      for (let j = 0; j < this.state.size; j++) {
+      for (let j = 0; j < this.state.colSize; j++) {
         let cell = {};
         let isAlive = false;
         cell.id = i * 5 + j;
@@ -174,7 +175,7 @@ class Grid extends Component {
       <Group>
         {this.state.cells.map(row => (
           row.map(cell => (
-            <Cell posX={cell.posX} posY={cell.posY} color={cell.color}/>
+            <Cell key={cell.id} posX={cell.posX} posY={cell.posY} color={cell.color}/>
           ))
         ))}
       </Group>
