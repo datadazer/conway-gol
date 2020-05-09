@@ -7,7 +7,7 @@ class Grid extends Component {
     super();
 
     this.state = {
-      size: 60,
+      size: 100,
       cells: [],
       generation: 0,
     }
@@ -21,8 +21,8 @@ class Grid extends Component {
         let cell = {};
         let isAlive = false;
         cell.id = i * 5 + j;
-        cell.posX = j * 9 + 9;
-        cell.posY = i * 9 + 9;
+        cell.posX = j * 7 + 7;
+        cell.posY = i * 7 + 7;
 
         if (useRandomSeed && Math.random() > 0.6) {
           isAlive = true;
@@ -34,14 +34,17 @@ class Grid extends Component {
       cells.push(cellsRow);
     }
 
-    // test
+    /*** Glider ***/
     // cells[1][2].isAlive = true;
     // cells[1][2].color = this.assignCellColor(cells[1][2].isAlive);
-    // cells[2][2].isAlive = true;
-    // cells[2][2].color = this.assignCellColor(cells[2][2].isAlive);
+    // cells[2][3].isAlive = true;
+    // cells[2][3].color = this.assignCellColor(cells[2][3].isAlive);
+    // cells[3][1].isAlive = true;
+    // cells[3][1].color = this.assignCellColor(cells[3][1].isAlive);
     // cells[3][2].isAlive = true;
     // cells[3][2].color = this.assignCellColor(cells[3][2].isAlive);
-    // console.log(cells[1][2]);
+    // cells[3][3].isAlive = true;
+    // cells[3][3].color = this.assignCellColor(cells[3][3].isAlive);
 
     this.setState({cells: cells});
   }
@@ -121,6 +124,8 @@ class Grid extends Component {
   }
 
   play() {
+    let debugTimerStart = performance.now();
+    let debugTimerEnd;
     let cells = this.state.cells;
     let cellsGen2 = [];
     // Any live cell with two or three live neighbors survives.
@@ -151,14 +156,13 @@ class Grid extends Component {
       cells: cellsGen2,
       generation: this.state.generation + 1
     });
-
-    // console.log(this.state.cells[0][0].isAlive);
+    debugTimerEnd = performance.now();
+    console.log(`play() took: ${debugTimerEnd - debugTimerStart}`);
   }
 
   componentDidMount() {
     this.generateCells(true);
     this.interval = setInterval(() => this.play(), 10);
-    // setTimeout(() => this.play(), 3000);
   }
 
   componentWillUnmount() {

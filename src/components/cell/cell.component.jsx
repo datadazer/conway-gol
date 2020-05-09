@@ -5,8 +5,8 @@ const Cell = props => (
   <Rect
     x={props.posX}
     y={props.posY}
-    width={8}
-    height={8}
+    width={6}
+    height={6}
     fill={props.color}
   />
 );
